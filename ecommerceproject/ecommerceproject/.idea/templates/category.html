@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+     {% if category %}
+         {{ category.descrption truncatewords:155}}
+      {% else %}
+          welcome to ABC store where you can buys different items....
+      {% end if %}
+{% endblock %}
+{% block title %}
+    {% if category %}
+         {{ category.name}}-ABC store
+      {% else %}
+          see our New collections-ABC store
+      {% end if %}
+{% endblock %}
+
+{% block content %}
+{% if category %}
+
+<div>
+    <div>
+        <p><a href="{% urls 'shop:allprodcat' %}"> our product collections"</a></p>
+    </div>
+</div>
+   {% end if %}
+<div>
+    {% if category %}
+       <img src="{{category.image.url}}" alt="{{category.name}}">
+</div>
+  <br>
+ <div>
+       <h1>{{category.name}}</h1>
+       <p>{{category.descrption}}</p>
+ </div>
+    {% else %}
+<img src="{% static 'img/banner.png' %}" alt="our products">
+</div>
+<br>
+<div>
+    <h1>Our products collections</h1>
+    <p>It helps the designer plan where the content will sit. It helps in creating drafts of the content on the pages of the website. It originates from the Latin text but is seen as gibberish.
+
+Sometimes, the reader gets distracted while creating or working on the website. That’s why this language is important.
+
+This tool makes the work easier for the webmaster.</p>
+</div>
+{% end if %}
+<div>
+    <div>
+        {% for product in products %}
+        <div>
+            <div>
+                <a href=""><img src="{{products.image.url}}"alt="{{product.name}}"></a>
+                <div>
+                    <h4>{{product.name}}</h4>
+                    <p>{{product.price}}</p>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
